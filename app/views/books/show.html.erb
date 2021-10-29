@@ -1,0 +1,33 @@
+<%= render 'books/list', book: @newbook, user: @user %>
+
+<div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table">
+    <tbody>
+      <%# @books.each do |book| %>
+      <tr>
+        <td>
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %><!--ユーザー画像-->
+          <%= link_to @user.name, user_path(current_user) %>
+        </td>
+        <td>
+          <%= link_to @book.title, book_path(@book.id) %><!--Title-->
+        </td>
+        <td>
+          <%= @book.body %><!--body(opinion)-->
+        </td>
+        <td>
+          <% if @book.user == current_user %>
+            <%= link_to "Edit", edit_book_path(@book) %><!--edit-->
+          <% end %>
+        </td>
+        <td>
+          <% if @book.user == current_user %>
+            <%= link_to "Destroy", book_path(@book), method: :delete  %><!--destroy-->
+          <% end %>
+        </td>
+      </tr>
+      <%# end %>
+    </tbody>
+  </table>
+</div>
